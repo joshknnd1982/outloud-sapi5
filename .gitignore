@@ -1,0 +1,14 @@
+# Engine binaries and language data (IBM property - never committed)
+bin/
+
+# Build trees and staged output
+build/
+build_x86/
+build_x64/
+output/
+test_output/
+
+# Local test artifacts
+test/*.exe
+test/*.obj
+*.wav

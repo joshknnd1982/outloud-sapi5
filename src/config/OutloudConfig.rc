@@ -1,0 +1,68 @@
+#include <windows.h>
+#include "resource.h"
+
+IDD_CONFIG DIALOGEX 0, 0, 260, 342
+STYLE DS_SETFONT | DS_MODALFRAME | DS_CENTER | WS_POPUP | WS_CAPTION | WS_SYSMENU | WS_MINIMIZEBOX
+CAPTION "Outloud TTS Configuration"
+FONT 9, "Segoe UI", 400, 0, 0x1
+BEGIN
+    LTEXT           "&Language:", -1, 10, 10, 80, 9
+    COMBOBOX        IDC_LANGUAGE, 100, 8, 150, 200, CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+
+    LTEXT           "Voice &variant:", -1, 10, 28, 80, 9
+    COMBOBOX        IDC_VARIANT, 100, 26, 150, 160, CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+
+    LTEXT           "&Rate (0 to 250):", -1, 10, 46, 84, 9
+    EDITTEXT        IDC_RATE, 100, 44, 44, 13, ES_NUMBER | ES_AUTOHSCROLL
+    CONTROL         "", IDC_RATE_SPIN, "msctls_updown32",
+                    UDS_SETBUDDYINT | UDS_AUTOBUDDY | UDS_ALIGNRIGHT | UDS_ARROWKEYS, 0, 0, 11, 13
+
+    LTEXT           "&Pitch (0 to 100):", -1, 10, 64, 84, 9
+    EDITTEXT        IDC_PITCH, 100, 62, 44, 13, ES_NUMBER | ES_AUTOHSCROLL
+    CONTROL         "", IDC_PITCH_SPIN, "msctls_updown32",
+                    UDS_SETBUDDYINT | UDS_AUTOBUDDY | UDS_ALIGNRIGHT | UDS_ARROWKEYS, 0, 0, 11, 13
+
+    LTEXT           "&Inflection (0 to 100):", -1, 10, 82, 84, 9
+    EDITTEXT        IDC_INFLECTION, 100, 80, 44, 13, ES_NUMBER | ES_AUTOHSCROLL
+    CONTROL         "", IDC_INFLECTION_SPIN, "msctls_updown32",
+                    UDS_SETBUDDYINT | UDS_AUTOBUDDY | UDS_ALIGNRIGHT | UDS_ARROWKEYS, 0, 0, 11, 13
+
+    LTEXT           "Hea&d size (0 to 100):", -1, 10, 100, 84, 9
+    EDITTEXT        IDC_HEADSIZE, 100, 98, 44, 13, ES_NUMBER | ES_AUTOHSCROLL
+    CONTROL         "", IDC_HEADSIZE_SPIN, "msctls_updown32",
+                    UDS_SETBUDDYINT | UDS_AUTOBUDDY | UDS_ALIGNRIGHT | UDS_ARROWKEYS, 0, 0, 11, 13
+
+    LTEXT           "Rou&ghness (0 to 100):", -1, 10, 118, 84, 9
+    EDITTEXT        IDC_ROUGHNESS, 100, 116, 44, 13, ES_NUMBER | ES_AUTOHSCROLL
+    CONTROL         "", IDC_ROUGHNESS_SPIN, "msctls_updown32",
+                    UDS_SETBUDDYINT | UDS_AUTOBUDDY | UDS_ALIGNRIGHT | UDS_ARROWKEYS, 0, 0, 11, 13
+
+    LTEXT           "Breathi&ness (0 to 100):", -1, 10, 136, 84, 9
+    EDITTEXT        IDC_BREATHINESS, 100, 134, 44, 13, ES_NUMBER | ES_AUTOHSCROLL
+    CONTROL         "", IDC_BREATHINESS_SPIN, "msctls_updown32",
+                    UDS_SETBUDDYINT | UDS_AUTOBUDDY | UDS_ALIGNRIGHT | UDS_ARROWKEYS, 0, 0, 11, 13
+
+    LTEXT           "V&olume (0 to 100):", -1, 10, 154, 84, 9
+    EDITTEXT        IDC_VOLUME, 100, 152, 44, 13, ES_NUMBER | ES_AUTOHSCROLL
+    CONTROL         "", IDC_VOLUME_SPIN, "msctls_updown32",
+                    UDS_SETBUDDYINT | UDS_AUTOBUDDY | UDS_ALIGNRIGHT | UDS_ARROWKEYS, 0, 0, 11, 13
+
+    AUTOCHECKBOX    "Enable backquote voice &tags", IDC_BACKQUOTE, 10, 174, 240, 10
+    AUTOCHECKBOX    "Enable &abbreviation expansion", IDC_ABBREV, 10, 188, 240, 10
+    AUTOCHECKBOX    "Enable phras&e prediction", IDC_PHRASE, 10, 202, 240, 10
+
+    LTEXT           "Pa&uses:", -1, 10, 218, 80, 9
+    COMBOBOX        IDC_PAUSES, 100, 216, 150, 80, CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+
+    AUTOCHECKBOX    "Al&ways Send Current Speech Settings", IDC_SENDPARAMS, 10, 234, 240, 10
+
+    LTEXT           "Sa&mple rate:", -1, 10, 250, 80, 9
+    COMBOBOX        IDC_SAMPLERATE, 100, 248, 150, 80, CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+
+    AUTOCHECKBOX    "Enable de&bug logging", IDC_DEBUGLOG, 10, 266, 240, 10
+
+    PUSHBUTTON      "Pre&view", IDC_PREVIEW, 10, 284, 55, 15
+    PUSHBUTTON      "&Stop", IDC_STOPBTN, 70, 284, 55, 15
+    PUSHBUTTON      "Restore de&faults", IDC_DEFAULTS, 130, 284, 70, 15
+    DEFPUSHBUTTON   "&Close", IDOK, 10, 306, 55, 15
+END
