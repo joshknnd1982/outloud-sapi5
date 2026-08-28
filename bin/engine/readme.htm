@@ -1,0 +1,847 @@
+<!doctype HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html lang="en">
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>IBM Text-to-Speech Run Time Kit</title>
+<link rel="stylesheet" type="text/css" href="../../com.ibm.voicetools.doc/help.css">
+<meta name="GENERATOR" content="Microsoft FrontPage 5.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+</head>
+
+<body>
+
+<table border="0" width="95%">
+  <tr>
+    <td width="100%">
+    <h2 style="margin-top: 0"><b>IBM<sup><font size="3">(R)</font><font size="3"></font></sup> Text-to-Speech Run Time Kit<br>
+    Version 6.7.3.3<br>
+    Readme (win32.readme.6.7.3.3.html)</b></h2>
+    <p>(C) Copyright International Business Machines Corporation 1994 - 2003. All rights reserved. US Government Users Restricted Rights - Use, duplication or disclosure 
+    restricted by GSA ADP Schedule Contract with IBM Corp. </p>
+
+    <p>This Readme is organized into the following sections:</p>
+
+    <p><a href="#description">1.0 Description</a><br>
+    <a href="#whats new">2.0 What`s New</a><br>
+    <a href="#install req">3.0 Installation Requirements</a><br>
+    <a href="#install instr">4.0 Installation Instructions</a><br>
+    <a href="#work">5.0 Working with Concatenative Voices</a><br>
+    <a href="#uninstall">6.0 Uninstall Instructions</a><br>
+    <a href="#general">7.0 General Limitations and Comments</a><br>
+    <a href="#known">8.0 Known Problems and FAQs</a><br>
+    <a href="#developer">9.0 Developer Notes</a><br>
+    <a href="#memory">10.0 Memory and Performance</a><br>
+    <a href="#logging">11.0 Logging Utilities</a><br>
+    <a href="#notices">12.0 Notices</a><br>
+    <a href="#trade">13.0 Trademarks</a></p>
+
+    <hr>
+    <h3><a name="description"></a>1.0 Description</h3>
+    <p>IBM Text-to-Speech Run Time Kit provides the speech synthesis engine and components necessary for applications to produce speech. The Text-to-Speech (TTS) Run Time 
+    Kit produces speech from recordings of units of human speech. These units (possibly phonemes, syllables, words, or phrases) are then combined (concatenated) according 
+    to linguistic rules formulated from analyzed text. When these recorded speech units are entire phrases or sentences, the output can be very natural, human-sounding 
+    speech. </p>
+
+    <p>The Speech synthesis engine and data include capability for a concatenative voice dataset representation as well as for computer synthesized voice representation 
+    known as formant synthesis. The concatenative voice is derived from a professional speaker, speaking a particular language and dialect and recorded at a particular 
+    sampling rate. When a client program changes languages, and it is performing concatenative synthesis, a new voice dataset may have to be loaded into memory from disk, 
+    if it is not already cached in memory from previous usage. </p>
+
+    <p>The system will automatically choose concatenative synthesis if a voice dataset is available for the language, voice, and sample rate that you select. For example, 
+    if you are using English at 8 kHz with voice 1 and U.S. English voice 1 concatenative at 8 kHz has been installed, then the system will automatically use 
+    concatenative synthesis. Otherwise, the system will use formant synthesis. </p>
+
+    <p><b>Generation 3 </b></p>
+
+    <p>A Generation 3 voice is built using a significantly different process compared to previous releases. The process uses new algorithms for voice creation and 
+    synthesis. </p>
+
+    <p>The Generation 3 voices vary in size from 250 MB to 370 MB depending on the language and speaker. In spite of the size increase, performance is comparable to that 
+    of the previous release. </p>
+
+    <hr>
+    <h3><a name="whats new"></a>2.0 What&#39;s New</h3>
+    <p>The API for this release is unchanged from the previous release, with the following exceptions:</p>
+
+    <ul>
+      <li>New callback message: eciSynthesisBreak</li>
+      <li>Support for SSML, as defined by VoiceXML 2.0</li>
+    </ul>
+
+    <p>Enhancements have been made to the interface for inilog,&nbsp; inicache, and inifilter.</p>
+
+    <p>Improved voice quality of our concatenative TTS is achieved with the creation of Generation 3 voices and the use of algorithm enhancements. </p>
+
+    <p>Generation 3 Voices (new or updated): </p>
+
+    <ul>
+      <li>US English (Female) </li>
+      <li>French (Male, Female) </li>
+      <li>German (Female) </li>
+      <li>Norwegian (Male) </li>
+      <li>Swedish (Male) </li>
+      <li>Danish (Male) </li>
+      <li>Simplified Chinese (Female) </li>
+      <li>Korean (Male)</li>
+      <li>UK English (Male, Female)</li>
+    </ul>
+
+    <p>Also new in this release: </p>
+
+    <ul>
+      <li>Updated French Canadian voices</li>
+      <li>Updated Mexican Spanish male voice</li>
+      <li>SSML enhanced support. For details, see the <i>IBM Text-to-Speech API Reference, Version 6.7.2 </i>(tts.pdf).</li>
+      <li>Cache size (ability to set the size in bytes)</li>
+      <li>Foreign-words normalization for US English</li>
+      <li>Various improvements and fixes</li>
+    </ul>
+
+    <hr>
+    <h3><a name="install req"></a>3.0 Installation Requirements</h3>
+    <p><b>Hardware: </b></p>
+
+    <p>Hardware requirements are incremental requirements for the Text-to-Speech libraries. They are exclusive of the base requirements for your operating system and 
+    applications.</p>
+
+    <p>Formant:</p>
+
+    <ul>
+      <li>Processor performance equivalent to Intel<sup>(R)</sup> Pentium<sup>(R)</sup> 133 MHz with MMX with 256K L2 cache </li>
+      <li>10 MB of RAM </li>
+      <li>10 MB available hard disk space </li>
+      <li>Compatible 16 bit sound card </li>
+      <li>CD-ROM drive <br>
+&nbsp;</li>
+    </ul>
+
+    <p>Concatenative </p>
+
+    <ul>
+      <li>Processor performance equivalent to Intel Pentium III 266 MHz </li>
+      <li>10 MB of RAM plus additional RAM per Concatenative Voice loaded as specified below. </li>
+      <li>50 MB additional memory, per voice, is required for caching</li>
+      <li>10 MB available hard disk space + Voice requirements specified below </li>
+      <li>Concatenative Voice requirements (hard disk space &amp; RAM):</li>
+    </ul>
+
+    <blockquote>
+      <blockquote>
+        <p>280 MB for United States English (Male) <br>
+        330 MB for United States English (Female 1) <br>
+        280 MB for United States English (Female 2)<br>
+        320 MB for French (Male) <br>
+        320 MB for French (Female) <br>
+        300 MB for German (Male) <br>
+        300 MB for German (Female) <br>
+        280 MB for Korean (Male)<br>
+        300 MB for Norwegian (Male)<br>
+        300 MB for Swedish (Male)<br>
+        300 MB for Danish (Male)<br>
+        250 MB for Simplified Chinese (Female)<br>
+        270 MB for British English (Male)<br>
+        320 MB for British English (Female)<br>
+        190 MB for Canadian French (Male)<br>
+        190 MB for Canadian French (Female)<br>
+        200 MB for Mexican Spanish (Male)<br>
+        150 MB for all other voices </p>
+
+      </blockquote>
+    </blockquote>
+    <ul>
+      <li>Compatible 16-bit sound card </li>
+      <li>CD-ROM drive </li>
+    </ul>
+
+    <p>Note: Functionality is supported on the following platforms:</p>
+
+    <blockquote>
+      <p>Microsoft<sup>(R)</sup> Windows<sup>(R)</sup> 2000 with Service Pack 1 <br>
+      Microsoft Windows XP</p>
+
+    </blockquote>
+    <hr>
+    <h3><a name="install instr"></a>4.0 Installation Instructions </h3>
+    <p>If you are using the evaluation version for IBM Text-to-Speech, it will expire within 60 days after installation of the product. If you plan to use IBM 
+    Text-to-Speech beyond the trial period, please contact your IBM Representative.</p>
+
+    <p><b>End Users</b></p>
+
+    <p>Run setup.exe from the installation media and follow the instructions on the screen. You might be prompted to install concatenative voices. Select the voices to be 
+    used with concatenative voice synthesis.</p>
+
+    <p><b>ISVs</b></p>
+
+    <p>If you are deploying applications using the Text-to-Speech Run Time Kit, you must obtain a license from IBM for redistribution. </p>
+
+    <p>In addition, you will want to integrate our product installation with your product`s installation program. You will need to copy the redistributable TTS driver to 
+    your installation media, and invoke setup.exe.</p>
+
+    <p>The Text-to-Speech Run Time Kit installation program setup.exe takes the following command line arguments:</p>
+
+    <p>setup.exe [installPath] [/silent] [/hideaddremove] [/nr] [/ns] [/nl] [/nk] [-SMS] [/statusnone] [/statusold] [/concatall] [/concatnone] -lXXXX </p>
+
+    <p>-l (Lower Case L) requires the the following XXXX language code</p>
+
+    <div align="left">
+      <table border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="100%">
+        <tr>
+          <td width="25%">0003-Catalan</td>
+          <td width="25%">0005-Czech</td>
+          <td width="25%">0006-Danish</td>
+          <td width="25%">0007-German</td>
+        </tr>
+        <tr>
+          <td width="25%">0008-Greek</td>
+          <td width="25%">0009-English</td>
+          <td width="25%">000a-Spanish</td>
+          <td width="25%">000b-Finnish</td>
+        </tr>
+        <tr>
+          <td width="25%">000e-Hungarian</td>
+          <td width="25%">0010-Italian</td>
+          <td width="25%">0011-Japanese</td>
+          <td width="25%">0012-Korean</td>
+        </tr>
+        <tr>
+          <td width="25%">0013-Dutch</td>
+          <td width="25%">0014-Norwegian</td>
+          <td width="25%">0015-Polish</td>
+          <td width="25%">0019-Russian</td>
+        </tr>
+        <tr>
+          <td width="25%">001a-Croatian</td>
+          <td width="25%">001b-Slovak</td>
+          <td width="25%">001d-Swedish</td>
+          <td width="25%">001e-Thai</td>
+        </tr>
+        <tr>
+          <td width="25%">001f-Turkish</td>
+          <td width="25%">0021-Indonesian</td>
+          <td width="25%">0024-Slovenian</td>
+          <td width="25%">002d-Basque</td>
+        </tr>
+        <tr>
+          <td width="25%">0404-Chinese (Taiwan)</td>
+          <td width="25%">040c-French (Standard)</td>
+          <td width="25%">0416-Portuguese (Brazilian)</td>
+          <td width="25%">0804-Chinese (PRC)</td>
+        </tr>
+        <tr>
+          <td width="25%">&nbsp;0816-Portuguese (Standard)</td>
+          <td width="25%">0c0c-French (Canadian)</td>
+          <td width="25%">&nbsp;</td>
+          <td width="25%">&nbsp;</td>
+        </tr>
+      </table>
+    </div>
+    <p>Note: Due to an InstallShield<sup>(R)</sup> limitation, if you are using DoInstall, you must specify the same language as the parent installation.
+    <span style="background-color: #FFFFFF">(For more information, see InstallShield document Q144122</span>.)</p>
+
+    <p>&lt;Installpath&gt; can contain spaces and is a fully qualified path. No quotes should be placed around the path. Path will be ignored if TTS is already on the system. 
+    If a path is provided on the command line, the &quot;Choose Directory&quot; dialog will not be shown.</p>
+
+    <p>/silent<br>
+    Prevents everything except the path dialog from appearing. If voice data is detected, it too will ask which voices to install, regardless of this parameter.<br>
+    <br>
+    /hideaddremove<br>
+    Deletes the Add/Remove program entry from the control panel.</p>
+
+    <p>/nr <br>
+    Specifies no reboot message and subsequent reboot. If a calling application executes our install with a GUI, the calling install might perform additional logic. The 
+    calling install should then reboot if TTS requests. <span style="background-color: #FFFFFF">For more information on where reboot information is recorded in the 
+    registry, see the IBM Text-to-Speech SDK.</span> TTS functionality will not work until the requested reboot is carried out. If the /silent option is used, /nr is 
+    redundant.</p>
+
+    <p>[-SMS] <br>
+    Prevents a network connection and setup.exe from closing before the installation is complete. The switch works with installations originating from a Windows NT server 
+    over a network. Note that SMS is case-sensitive and must be uppercase.</p>
+
+    <p>/statusold<br>
+    By default, the TTS install shows a large progress-bar dialog box. Use the this option to display the small dialog box.</p>
+
+    <p>/statusnone<br>
+    Turns off the status box altogether.</p>
+
+    <p>/concatall<br>
+    Installs all concatenative voices. Check return codes for &quot;out of space.&quot;</p>
+
+    <p>/concatnone<br>
+    Installs none of the concatenative voices.</p>
+
+    <p>[Redundant, but still supported for backwards compatibility]<br>
+    /nk do not hide add remove (now default behavior)<br>
+    /nl no license (no license now packaged).<br>
+    /ns (silent install)</p>
+
+    <p>Note: The language parameter is <u>not</u> optional. A minimal amount of change is required to make old installations work.</p>
+
+    <hr>
+    <h3><a name="work"></a>5.0 Working with Concatenative Voices</h3>
+    <p>During installation, you can install concatenative voices from the selection presented to you. Due to disk space issues, periodic updates, or business reasons, you 
+    might want to add, remove, or relocate a concatenative voice. </p>
+
+    <p><b>inivoice</b></p>
+
+    <p>The inivoice tool registers and unregisters Concatenative text-to-speech voices. </p>
+
+    <p>Usage: inivoice [-u] &lt;voicenumber&gt; &lt;path to voice&gt;</p>
+
+    <p>where:</p>
+
+    <table border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="100%">
+      <tr>
+        <td width="10%" align="left" valign="top">-u</td>
+        <td width="50%">Uninstall the specified voice. </td>
+      </tr>
+      <tr>
+        <td width="10%" align="left" valign="top">voicenumber</td>
+        <td width="50%">Voice number (For use with ECICopyVoice API). </td>
+      </tr>
+      <tr>
+        <td width="10%" align="left" valign="top">path</td>
+        <td width="50%">Fully qualified path to voice synthInfo file.</td>
+      </tr>
+    </table>
+    <p>To add a voice, re-run the installation selecting the voice you wish to add, which runs inivoice.exe.</p>
+
+    <p>To remove a voice, you must unregister the voice using inivoice, and then manually delete it from the directory, such as:<br>
+    &lt;INSTALLATION DIRECTORY&gt;\voices\&lt;LANGUAGE&gt; \1at08KHz_1_0<br>
+    (where: &quot;1&quot; is the voice number, &quot; 08KHz&quot; is the sample rate, and &quot;1_0&quot; is the language code).</p>
+
+    <p>To relocate a voice or update a voice from a downloaded file, you must register the location of the voice using the inivoice.exe utility:<br>
+    inivoice.exe [-u] &lt;VOICENUMBER&gt; &lt;QUALIFIED PATH TO SYNTHINFO FILE&gt;</p>
+
+    <p>For example, to move voice 1 from TTS`s default installation path to F:\TTSVoices\us\1at08KHz_1_0, move the data files and then invoke the following command:<br>
+    C:&gt;inivoice.exe 1 &quot;F:\TTSVoices\us\1at08KHz_1_0\synthinfo&quot;</p>
+
+    <p>To unregister a voice with the system use the -u command:<br>
+    C:&gt;inivoice.exe -u 1 &quot;F:\TTSVoices\us\1at08KHz_1_0\synthinfo&quot;</p>
+
+    <p>Note: Concatenative voices allow the following parameters to be adjusted at run time: </p>
+
+    <ul>
+      <li>Volume </li>
+      <li>Pitch Baseline* </li>
+      <li>Speed </li>
+      <li>Pitch Fluctuation* </li>
+      <li>Word emphasis*</li>
+    </ul>
+
+    <blockquote>
+      <p>* Applies only to some voices </p>
+
+    </blockquote>
+    <p>The following parameters and annotations are not supported for concatenative voices: <br>
+    <br>
+&nbsp;&nbsp;&nbsp;&nbsp; Voice characteristics that are ignored:</p>
+
+    <ul>
+      <li>Head Size </li>
+      <li>Roughness </li>
+      <li>Breathiness <br>
+&nbsp;</li>
+    </ul>
+
+    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Additional annotations that are not supported: </p>
+
+    <ul>
+      <li>Word tone </li>
+      <li>Phrase-Final Intonation<br>
+&nbsp;</li>
+    </ul>
+
+    <p>The following parameters cause the voice to be switched:</p>
+
+    <ul>
+      <li>Gender </li>
+      <li>Sample Rate (see section 1 above) </li>
+      <li>Language<br>
+&nbsp;</li>
+    </ul>
+
+    <p>If a change is executed to one of the ignored parameters (listed above), no error will occur and the voice synthesis will not change. </p>
+
+    <p>In concatenative TTS, when you change languages, the voice characteristics are set to the default values for the currently active voice. As a result, if you`ve 
+    modified the speed or volume and you change languages, the speed and volume will revert to the default for the voice. </p>
+
+    <hr>
+    <h3><a name="uninstall"></a>6.0 Uninstall Instructions</h3>
+    <p>To uninstall the Text-to-Speech Run Time Kit: </p>
+
+    <p>Open the Settings &gt; Control Panel, and select &quot;Add/Remove Programs.&quot; Select the entry for IBM Text-to-Speech Runtime (for the appropriate language), and follow the 
+    instructions on the screen. </p>
+
+    <hr>
+    <h3><a name="general"></a>7.0 General Limitations and Comments</h3>
+    <p>This section contains information that is not specific to any particular element of the Text-to-Speech Run Time Kit, but is general or generic in nature. It is 
+    important to follow these recommendations and instructions to avoid abnormal or unpredictable results. </p>
+
+    <ul>
+      <li>This version supports the following languages with formant voices (Note: languages with a * denote formant and concatenative voice support, and languages with a 
+        + denote concatenative only): </li>
+    </ul>
+
+    <blockquote>
+      <p>Brazilian Portuguese* <br>
+      French* <br>
+      Canadian French* <br>
+      Finnish <br>
+      German* <br>
+      Italian* <br>
+      Mexican Spanish* <br>
+      Spanish* <br>
+      United States English* <br>
+      United Kingdom English* <br>
+      Korean* <br>
+      Cantonese* <br>
+      Mandarin Chinese (Simplified) (Female only)+ <br>
+      Taiwanese Chinese (Traditional)*<br>
+      Japanese* <br>
+      Norwegian+ (Male Only) <br>
+      Danish+ (Male Only) <br>
+      Swedish+ (Male Only) </p>
+
+    </blockquote>
+    <ul>
+      <li>Currently, the included e-mail filter is only available for the English, French, and German languages. <br>
+&nbsp;</li>
+      <li>The e-mail filter included with Text-to-Speech recognizes the following keywords in an e-mail message.</li>
+    </ul>
+
+    <p><b>Keyword Action </b></p>
+
+    <p>These keywords are recognized by all the e-mail filters: </p>
+
+    <div align="center">
+      <center>
+      <table border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="80%">
+        <tr>
+          <td width="10%" align="left" valign="top">Subject</td>
+          <td width="50%">Parse out the subject of the message and return a new subject string in the current language to the client application. </td>
+        </tr>
+        <tr>
+          <td width="10%" align="left" valign="top">From</td>
+          <td width="50%">Parse out the sender of the message and return a new string in the current language to the client application. </td>
+        </tr>
+        <tr>
+          <td width="10%" align="left" valign="top">Date</td>
+          <td width="50%">Parse out the date that the message was sent and return a new string in the current language with that date to the client application. </td>
+        </tr>
+      </table>
+      </center>
+    </div>
+    <p>The German e-mail filter recognizes the following additional keywords: </p>
+
+    <div align="center">
+      <center>
+      <table border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="80%">
+        <tr>
+          <td width="10%" align="left" valign="top">Betreff</td>
+          <td width="50%">Parse out the subject of the message and return a new subject string to the client application. </td>
+        </tr>
+        <tr>
+          <td width="10%" align="left" valign="top">Von</td>
+          <td width="50%">Parse out the sender of the message and return a new string to the client application.</td>
+        </tr>
+        <tr>
+          <td width="10%" align="left" valign="top">Datum</td>
+          <td width="50%">Parse out the date that the message was sent and return a new string with that date to the client application.</td>
+        </tr>
+        <tr>
+          <td width="10%" align="left" valign="top">Gesendet am</td>
+          <td width="50%">Parse out the date that the message was sent and return a new string with that date to the client application.</td>
+        </tr>
+        <tr>
+          <td width="10%" align="left" valign="top">Sent</td>
+          <td width="50%">Parse out the date that the message was sent and return a new string in the current language with that date to the client application.</td>
+        </tr>
+      </table>
+      </center>
+    </div>
+    <p>The French e-mail filter recognizes the following additional keywords: </p>
+
+    <div align="center">
+      <center>
+      <table border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="80%">
+        <tr>
+          <td width="10%" align="left" valign="top">Objet</td>
+          <td width="50%">Parse out the subject of the message and return a new subject string to the client application.</td>
+        </tr>
+        <tr>
+          <td width="10%" align="left" valign="top">De</td>
+          <td width="50%">Parse out the sender of the message and return a new string to the client application. </td>
+        </tr>
+        <tr>
+          <td width="10%" align="left" valign="top">Reçu</td>
+          <td width="50%">Parse out the date that the message was sent and return a new string with that date to the client application.</td>
+        </tr>
+        <tr>
+          <td width="10%" align="left" valign="top">Envoyé</td>
+          <td width="50%">Parse out the date that the message was sent and return a new string with that date to the client application. </td>
+        </tr>
+      </table>
+      </center>
+    </div>
+    <p>All other keywords are filtered out by default. </p>
+
+    <ul>
+      <li>The included e-mail filter will also filter the following &quot;emoticons&quot; from messages:<br>
+        (R) (C) :-) :-( :-] :) ;) :-#| :( :-&gt; :-&lt; :-\\ <br>
+        (-: &gt;:-&lt; :-| :-o :-c |-) |-O :-# :-% :-&amp; :-`| :-)` <br>
+        :-)8 :-* :-/ :-: :-? :-@ (:I :-[ *:o) +-(:-).-) &lt;:I <br>
+        @:I [:-|] 8-# 8:-) }(:-( :-{ :-{( :-} :-O :-6 :-8( :-9 <br>
+        :-D :-e :-i :-p :-t :-v ::-) 8-) :&lt;| :=) :&gt;) :~) <br>
+        ;-) %-) (-) (:-) )8-) *-( *&lt;|:-)-:-) ;-\\ =:-) [:-) O-) <br>
+        8-| {(:-){:-) &lt;g&gt; &lt;G&gt; <br>
+&nbsp;</li>
+      <li>The Text-to-Speech SDK includes a file &quot;maildict.dct&quot; that includes translations for common e-mail jargon and abbreviations. For best results when processing 
+        e-mail messages, this dictionary file should be used in conjunction with the included e-mail filter.</li>
+    </ul>
+
+    <p><b>inifilter </b></p>
+
+    <p>The inifilter tool registers and unregisters filters that are used as preprocessor addins for eci to modify text.</p>
+
+    <p>&nbsp;Usage: inifilter [-ul] /filter:[filterNum] /path:[filterPath] /autoload:[y/n] /lang:[lang]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; /name:[filterDescription]</p>
+
+    <p>where:</p>
+
+    <table border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="100%">
+      <tr>
+        <td width="10%" align="left" valign="top">-u</td>
+        <td width="50%">Disable specified filter </td>
+      </tr>
+      <tr>
+        <td width="10%" align="left" valign="top">-l</td>
+        <td width="50%">Display statistics about specified filter </td>
+      </tr>
+      <tr>
+        <td width="10%" align="left" valign="top">filter</td>
+        <td width="50%">Filter number </td>
+      </tr>
+      <tr>
+        <td width="10%" align="left" valign="top">path</td>
+        <td width="50%">Fully qualified filename of filter </td>
+      </tr>
+      <tr>
+        <td width="10%" align="left" valign="top">autoload</td>
+        <td width="50%">Filter is automatically loaded when language selected.<p>Valid values are: <br>
+        n&nbsp; -&nbsp; Filter is not automatically loaded<br>
+        y&nbsp; -&nbsp; Filter is automatically loaded </td>
+      </tr>
+      <tr>
+        <td width="10%" align="left" valign="top">lang</td>
+        <td width="50%">&nbsp;Language/Dialect for the filter <p>Valid language/dialect values are: </p>
+
+        <p>1.0 - US English <br>
+        1.1 - British English <br>
+        2.0 - Castilian Spanish <br>
+        2.1 - Mexican Spanish <br>
+        3.0 - Standard French <br>
+        3.1 - Canadian French <br>
+        4.0 - Standard German <br>
+        5.0 - Standard Italian <br>
+        6.0 - Mandarin Chinese (Simplified) <br>
+        6.1 - Taiwanese Chinese (Traditional)<br>
+        7.0 - Brazilian Portuguese <br>
+        8.0 - Standard Japanese <br>
+        9.0 - Standard Finnish <br>
+        10.0 - Standard Korean <br>
+        11.0 - Standard Cantonese <br>
+        11.1 - Hong Kong Cantonese <br>
+        13.0 - Standard Norwegian <br>
+        14.0 - Standard Swedish <br>
+        15.0 - Standard Danish</td>
+      </tr>
+      <tr>
+        <td width="10%" align="left" valign="top">name</td>
+        <td width="50%">Meaningful description of the filter</td>
+      </tr>
+    </table>
+    <p>Note: If -u is specified, only the language, filter and INI file may be specified. </p>
+
+    <p>To activate an installed filter, your application must send the new text annotation `faN, where N is the filter number. To deactivate a filter, send the `fdN text 
+    annotation, where N is the filter number. </p>
+
+    <p>Example: </p>
+
+    <p>To register the French e-mail filter as the default filter, enter the following: <br>
+&nbsp;&nbsp;&nbsp;&nbsp; inifilter /filter:0 /path:&quot;c:\program files\viavoicetts\FRAmfilt.dll&quot; /lang:3.0</p>
+
+    <p>Note: The e-mail filter can be registered with any filter number. However, the filter number that is chosen with the inifilter command is the filter number you 
+    must use to activate it. For example, if the e-mail filter is assigned a filter number of 10, you would use that filter number for the filter annotations or APIs.</p>
+
+    <hr>
+    <h3><a name="known"></a>8.0 Known Problems &amp; FAQs</h3>
+    <p>The following are known problems that are included in this release:</p>
+
+    <ul>
+      <li>On Microsoft Windows XP and Windows 2000, non-administrator users might receive error messages pertaining to the InstallShield engine not being able to 
+        register. You will need to have the proper access permissions to properly install.<br>
+&nbsp;</li>
+      <li>On Windows XP and Windows 2000, you must have proper access permissions to run the command line tools (inicache, inifilter, inivoice, and initrace). If you do 
+        not have the proper access permissions, there is no error message, and your changes will not be made. <br>
+&nbsp;</li>
+      <li>The installation copies a large amount of data from the installation media. During the copy process, very little screen activity is visible.<br>
+&nbsp;</li>
+      <li>If multiple versions of TTS are to be installed on the same system, you should install all versions of TTS to the same directory.<br>
+&nbsp;</li>
+      <li>Unsupported items in Mandarin Chinese (Simplified) include: <ul>
+        <li>Formant synthesis</li>
+        <li>Word Index Callback</li>
+        <li>Phoneme Index Callback</li>
+        <li>User dictionaries</li>
+        <li>Voice switching</li>
+        <li>Sample rate switching (only 8 kHz is supported)</li>
+        <li>Baseline pitch modification</li>
+        <li>Speed changes<br>
+&nbsp;</li>
+        </ul>
+
+      </li>
+    </ul>
+
+    <p><b>FAQs </b></p>
+
+    <p>Q: Why is my application still synthesizing with formant synthesis?</p>
+
+    <p>A: When you install an 8 kHz voice the system will produce concatenative synthesis for any application which requests synthesis at 8 kHz. By default the system 
+    generates audio at 11 kHz. In order to produce concatenative speech use eciSetDefaultParam or eciSetParam to set the sample rate. </p>
+
+    <hr>
+    <h3><a name="developer"></a>9.0 Developer Notes</h3>
+    <ul>
+      <li>The Text-to-Speech SDK is a good starting point for developing applications.<br>
+&nbsp;</li>
+      <li>Concatenative Memory Manager (CMM) cmmcmd Utility was created to interface with the Concatenative Memory Manager (CMM). <br>
+        Note : This is a support tool and was not intended to be an end-user utility. <br>
+        <br>
+        For more information on the CMM Utility, run the cmmcmd command.</li>
+    </ul>
+
+    <hr>
+    <h3><a name="memory"></a>10.0 Memory and Performance Tools</h3>
+    <p>Due to the computational complexity and amount of memory required to produce concatenative speech, IBM Text-to-Speech utilizes shared memory and speech caching to 
+    reduce the amount of system resources required. </p>
+
+    <ul>
+      <li>The concatenative TTS engine requires more physical memory (to store the data required to produce natural speech synthesis) than formant synthesis. Since many 
+        processes on a server may require access to the same data, TTS loads and shares one instance between all the processes. In addition, TTS allows configuration of 
+        how long voice data will remain loaded after the last access. By default, each concatenative voice remains loaded for 10 minutes. To configure and stop sharing 
+        the memory the Concatenative Memory Manager (CMM) utility, cmmcmd.exe, is provided. For more information on the CMM Utility, run the cmmcmd command.<br>
+&nbsp;</li>
+      <li>The concatenative TTS engine requires more computational power than formant TTS engine. Since the domains of many TTS applications are limited to a small 
+        vocabulary, Text-to-Speech now provides a mechanism (speech caching) to bypass complex computations for text which has already been processed. The concatenative 
+        system can be configured, per language, to set a number of phrases `to remember` as pre-synthesized phrases. In addition, the memory can be made persistent (that 
+        is, saved on exit and reloaded at voice initialization). This mechanism can be beneficial in environments in which the text that is synthesized is very 
+        repetitive. <br>
+        By default caching is turned on at installation and the location of the cache file is \Program Files\viavoicetts\&lt;language&gt;\&lt;voicename&gt;\cache on Windows.<br>
+        To enable and configure speech caching, the utility inicache.exe is provided:</li>
+    </ul>
+
+    <p><b>inicache</b></p>
+
+    <p>The inicache tool enables and configures speech caching.</p>
+
+    <p>Usage: inicache [-d] [-l &lt;language&gt;] [-r &lt;sample rate&gt;] [-v &lt;voice&gt;] -p &lt;path&gt;]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [-s &lt;persistent&gt;] [-h &lt;phrases&gt;] [-u &lt;dual language&gt;] [-x][-b &lt;bytes&gt;] <br>
+    <br>
+    where: </p>
+
+    <table border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="100%">
+      <tr>
+        <td width="18%" align="left" valign="top">-d</td>
+        <td width="82%">Displays current values (may only specify language, sample rate, or voice) </td>
+      </tr>
+      <tr>
+        <td width="18%" align="left" valign="top">-l</td>
+        <td width="82%">&lt;language&gt; is the language dialect: <p>1.0 - US English <br>
+        1.1 - British English <br>
+        2.0 - Castilian Spanish <br>
+        2.1 - Mexican Spanish <br>
+        3.0 - Standard French <br>
+        3.1 - Canadian French <br>
+        4.0 - Standard German <br>
+        5.0 - Standard Italian <br>
+        6.0 - Mandarin Chinese (Simplified)<br>
+        6.1 - Taiwanese Chinese (Traditional)<br>
+        7.0 - Brazilian Portuguese <br>
+        8.0 - Standard Japanese <br>
+        9.0 - Standard Finnish <br>
+        10.0 - Standard Korean <br>
+        11.0 - Standard Cantonese <br>
+        11.1 - Hong Kong Cantonese <br>
+        13.0 - Standard Norwegian <br>
+        14.0 - Standard Swedish <br>
+        15.0 - Standard Danish</td>
+      </tr>
+      <tr>
+        <td width="18%" align="left" valign="top">-r</td>
+        <td width="82%">&lt;sample rate&gt; is the sample rate: <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 0 = 08 kHz (Default) <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1 = 11 kHz <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2 = 22 kHz </td>
+      </tr>
+      <tr>
+        <td width="18%" align="left" valign="top">-p</td>
+        <td width="82%">&lt;path&gt; is the fully qualified path to the cache file.</td>
+      </tr>
+      <tr>
+        <td width="18%" align="left" valign="top">-v</td>
+        <td width="82%">&lt;voice&gt; is the voice number (1, by default). </td>
+      </tr>
+      <tr>
+        <td width="18%" align="left" valign="top">-s</td>
+        <td width="82%">&lt;persistent&gt; is the cache file saved: <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 0 = No (default setting)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1 = Yes</td>
+      </tr>
+      <tr>
+        <td width="18%" align="left" valign="top">-h</td>
+        <td width="82%">&lt;phrases&gt; is the maximum number of phrases to cache (100, by default).</td>
+      </tr>
+      <tr>
+        <td width="18%" align="left" valign="top">-u</td>
+        <td width="82%">&lt;dual language&gt; is the cache for the dual language (if applicable). <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 0 = No (default setting) <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1 = Yes </td>
+      </tr>
+      <tr>
+        <td width="18%" align="left" valign="top">-x</td>
+        <td width="82%">Removes caching for specified language. </td>
+      </tr>
+      <tr>
+        <td width="18%" align="left" valign="top">-b</td>
+        <td width="82%">&lt;bytes&gt; is the maximum size of the cache file in bytes.</td>
+      </tr>
+    </table>
+    <p>&nbsp;Notes:</p>
+
+    <ul>
+      <li>Paths that include spaces must be enclosed in double-quotes.</li>
+      <li>If the -r, -u, or -v options are specified, a path must also be included.</li>
+      <li>Specify either the number of phrases or a maximum cache size in bytes, but not both.</li>
+      <li>Please refer to the documentation for valid language/dialect values.</li>
+    </ul>
+
+    <p>Examples: </p>
+
+    <p>inicache -p &quot;C:\Program Files\ViaVoiceTTS\voices\En_US\1at08KHz_1_0\cache&quot;<br>
+    <br>
+    inicache -h 5000 -u 1 -s 0 -l 6.0 -p &quot;C:\Program Files\ViaVoiceTTS\voices\En_US\1at08KHz_1_0\cache&quot;<br>
+    <br>
+    inicache -l 2.0 -v 2 -r 1 -p &quot;C:\Program Files\ViaVoiceTTS\voices\En_US\1at08KHz_1_0\cache&quot;</p>
+
+    <hr>
+    <h3><a name="logging"></a>11.0 Logging Utilities</h3>
+    <p>A logging utility, inilog, is included in this release. Inilog replaces initrace from earlier releases. </p>
+
+    <p>Logging is automatically turned on when the product is installed. By default, this log is written to \Program Files\viavoicetts\tts.log on Windows.</p>
+
+    <p>Users and developers have the ability to customize the format of the log or the location of the log via inilog. This utility can be used to view the current 
+    settings and to modify them. </p>
+
+    <p><b>inilog</b></p>
+
+    <p>The inilog utility can be used to customize the format or location of the log, as well as to view the current settings and modify them.</p>
+
+    <p>Usage: inilog -d <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; inilog [-f &lt;filter&gt;] [-l &lt;level&gt;] [-p &lt;path&gt;] [-c &lt;comps&gt;]<br>
+    <br>
+    where:</p>
+
+    <table border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="100%">
+      <tr>
+        <td width="12%" align="left" valign="top">-d</td>
+        <td width="88%">Displays current settings (any other options will be ignored). </td>
+      </tr>
+      <tr>
+        <td width="12%" align="left" valign="top">-f</td>
+        <td width="88%">&lt;filter&gt; is the filter mask: <p>D = Data and Time (Default)<br>
+        P = Process ID<br>
+        T = Thread ID<br>
+        C = Component name (Default)<br>
+        F = Function/Method name (Default)<br>
+        I = Source file name<br>
+        L = Source Line number </td>
+      </tr>
+      <tr>
+        <td width="12%" align="left" valign="top">-l</td>
+        <td width="88%">&lt;level&gt; is the logging level: <p>0 = No logging<br>
+        1 = Error only (Default)<br>
+        2 = Warning + Error<br>
+        3 = Trace + Warning + Error<br>
+        4 = Debug + Trace + Warning + Error </td>
+      </tr>
+      <tr>
+        <td width="12%" align="left" valign="top">-p</td>
+        <td width="88%">&lt;path&gt; is the fully qualified (absolute) path to the desired location of the tts.log file (current working directory, by default). </td>
+      </tr>
+      <tr>
+        <td width="12%" align="left" valign="top">-c</td>
+        <td width="88%">&lt;comps&gt; is a list of components and levels to be logged. </td>
+      </tr>
+    </table>
+    <p>Notes:</p>
+
+    <ul>
+      <li>Paths that include spaces must be enclosed in double-quotes.</li>
+      <li>To reset filter (-f) or component (-c) to undefined, specify: &quot;&quot;.</li>
+    </ul>
+
+    <p>Examples: </p>
+
+    <blockquote>
+      <p>inilog -p &quot;C:\Program Files\ViaVoiceTTS\log&quot;<br>
+      inilog -l 2 -f DCF <br>
+      inilog -c eci:4,cmm:2,tor:2</p>
+
+    </blockquote>
+    <p>For example, inilog -f DC produces log files containing the date, time and component name.</p>
+
+    <p>inilog -c &lt;component&gt;:&lt;loglevel&gt; -- to modify the log level for certain components. The following are the valid component names:<br>
+&nbsp;&nbsp;&nbsp;&nbsp; eci, torr, cmm, eti</p>
+
+    <p>Multiple components can be specified separated by a comma. For example, inilog -c eci:4,cmm:2 modifies the log level of eci to 4 and the log level of cmm to 2.</p>
+
+    <p>The default logging is level 1 with format DCF (date, time component and function name).</p>
+
+    <hr>
+    <h3><a name="notices"></a>12.0 Notices</h3>
+    <p>The following paragraph does not apply to the&nbsp;United Kingdom or any country where such&nbsp;provisions are inconsistent with local law:&nbsp;</p>
+
+    <p>INTERNATIONAL BUSINESS MACHINES CORPORATION&nbsp;PROVIDES THIS PUBLICATION &quot;AS IS&quot; WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING, BUT NOT LIMITED 
+    TO, THE IMPLIED WARRANTIES OF&nbsp;NON-INFRINGEMENT, MERCHANTABILITY OR FITNESS FOR&nbsp;A PARTICULAR PURPOSE. Some states do not allow&nbsp;disclaimer of express or implied 
+    warranties in certain transactions, therefore, this statement&nbsp;may not apply to you.&nbsp;</p>
+
+    <p>This information could include technical&nbsp;inaccuracies or typographical errors. Changes are&nbsp;periodically made to the information herein; these changes will be 
+    incorporated in new editions of&nbsp;the publication. IBM may make improvements and\or&nbsp;changes in the product(s) and\or the program(s)&nbsp;described in this publication at any 
+    time without&nbsp;notice.</p>
+
+    <p>Any references in this information to non-IBM Web&nbsp;sites are provided for convenience only and do not in any manner serve as an endorsement of those Web sites. The 
+    materials at those Web sites are not&nbsp;part of the materials for this IBM product and&nbsp;use of those Web sites is at your own risk.</p>
+
+    <p>Information concerning non-IBM products was&nbsp;obtained from the suppliers of those products,&nbsp;their published announcements or other publicly&nbsp;available sources. IBM 
+    has not tested those&nbsp;products and cannot confirm the accuracy of&nbsp;performance, compatibility or any other claims&nbsp;related to non-IBM products. Questions on the 
+    capabilities of non-IBM products should be&nbsp;addressed to the suppliers of those products.</p>
+
+    <hr>
+    <h3><a name="trade"></a>13.0 TRADEMARKS</h3>
+    <p>The following terms are trademarks or registered trademarks of the International Business Machines&nbsp;Corporation in the United States, other countries,&nbsp;or both:</p>
+
+    <p>IBM</p>
+
+    <p>Intel and Pentium are trademarks of Intel Corporation in the United States, other countries, or both.</p>
+
+    <p>Microsoft, Windows, and NT are trademarks of Microsoft Corporation in the United States, other countries, or both.</p>
+
+    <p>Other company, product, and service names may be trademarks or service marks of others.</td>
+  </tr>
+</table>
+
+</body>
+
+</html>

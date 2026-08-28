@@ -3,6 +3,7 @@
 #include <algorithm>
 
 #include "IEnumSpObjectTokensImpl.hpp"
+#include "installed_voices.h"
 
 namespace Outloud {
 namespace sapi {
@@ -14,8 +15,19 @@ IEnumSpObjectTokensImpl::IEnumSpObjectTokensImpl(bool initialize)
         return;
     }
 
+    // Token 0 is the Configured Voice and is always present. The rest are
+    // language x variant combinations; setup records which of those it
+    // installed in voices.ini, and only those are offered to SAPI.
     sapi_voices_.reserve(static_cast<size_t>(voice_token_count));
-    for (int i = 0; i < voice_token_count; ++i) {
+    sapi_voices_.emplace_back(0);
+    for (int i = 1; i < voice_token_count; ++i) {
+        const voice_attributes attr(i);
+        if (!InstalledVoices::has_language(attr.language_index())) {
+            continue;
+        }
+        if (!InstalledVoices::has_variant(voices::variants[attr.variant_index()].id)) {
+            continue;
+        }
         sapi_voices_.emplace_back(i);
     }
 }

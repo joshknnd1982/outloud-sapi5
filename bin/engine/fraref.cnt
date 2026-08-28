@@ -1,0 +1,28 @@
+:Base FRAref.hlp>main
+1 ViaVoice Outloud
+2 Introduction=IDH_eti_eloquence_contents
+2 Etiquettes
+3 Etiquettes=IDH_tags
+3 Annotations=IDH_annotations
+3 Langue et dialecte=IDH_language_and_dialect
+3 Emphase=IDH_emphasis
+3 Durée de pause=IDH_pause_length
+3 Voix intégrées=IDH_who_s_talking
+3 Caractéristiques vocales=IDH_voice_attributes
+3 Tableau des étiquettes=IDH_table_of_tags
+2 Voix pour le téléphone
+3 Voix pour le téléphone=IDH_voices_for_phone
+2 Alphabet phonétique
+3 Représentation phonétique symbolique (RPS)=IDH_symbolic_phonetic_representation__spr
+3 Symboles RPS=IDH_spr_symbols
+3 Emphase syllabique=IDH_syllable_stress
+3 Liaison=IDH_liaison
+2 Dictionnaires
+3 Dictionnaires de l'utilisateur=IDH_user_dictionaries
+3 Dictionnaire de mots spéciaux=IDH_special_words_dictionary
+3 Dictionnaire d'abréviations=IDH_abbreviations_dictionary
+3 Dictionnaire de racines=IDH_roots_dictionary
+2 Référence
+3 Tableau des étiquettes=IDH_table_of_tags
+3 Symboles RPS=IDH_spr_symbols
+3 Glossaire=IDH_glossary

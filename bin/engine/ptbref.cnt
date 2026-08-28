@@ -1,0 +1,27 @@
+:Base PTBref.hlp
+1 Referencia do ViaVoice Outloud 
+2 Introdução=IDH_eti_eloquence_contents
+2 Marcaçaões
+3 Introdução as Marcaçãoes =IDH_tags
+3 Anotações=IDH_annotations
+3 Idioma e Dialeto=IDH_language_and_dialect
+3 Ênfase=IDH_emphasis
+3 Comprimento de Pausa=IDH_pause_length
+3 Vozes Internas=IDH_who_s_talking
+3 Característucas de Voz=IDH_voice_attributes
+3 Tabela de Marcações=IDH_table_of_tags
+2 Vozes para o Telefone
+3 Vozes para o Telefone=IDH_voices_for_phone
+2 Ortografia fonética
+3 Representação Fonética Simbólica (SPR)=IDH_symbolic_phonetic_representation__spr
+3 Símbolos SPR=IDH_spr_symbols
+3 Ênfase em Sílaba=IDH_syllable_stress
+2 Dicionários
+3 Dicionários do Usuário=IDH_user_dictionaries
+3 Dicionário de Palavras Especiais=IDH_special_words_dictionary
+3 Dicionário de Abreviaturas=IDH_abbreviations_dictionary
+3 Dicionário de Radicais=IDH_roots_dictionary
+2 Referencia
+3 Tabela de Marcações=IDH_table_of_tags
+3 Tabela de Símbolos SPR=IDH_spr_symbols
+3 Glossário=IDH_glossary

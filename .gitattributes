@@ -1,0 +1,3 @@
+# The prebuilt binaries and the IBM engine runtime are byte-exact payloads:
+# never apply line-ending conversion to anything under bin/.
+bin/** binary

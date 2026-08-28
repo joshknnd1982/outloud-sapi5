@@ -2,7 +2,9 @@
 
 A native Windows SAPI5 wrapper for the abandoned **IBM ViaVoice Outloud** text-to-speech engine. It exposes **all 17 languages and all 8 voice variants — 137 SAPI5 voices** — to any SAPI5-compatible application, including screen readers (NVDA, JAWS, Narrator) and reading apps (Balabolka, Bookworm), in both 32-bit and 64-bit programs.
 
-> **This repository contains source code only.** The IBM engine binaries and language data are not included. A ready-to-use installer is published on the [Releases](../../releases) page.
+**You choose what gets installed.** The setup wizard offers every one of the 17 languages and every one of the 8 voice personalities as a separate, individually selectable component, so an installation can be anything from all 137 voices down to a single voice in a single language.
+
+> A ready-to-use installer is published on the [Releases](../../releases) page. This repository also carries the prebuilt binaries and the engine runtime, so a `git clone` gives you a working `bin\` directory without building anything. The IBM engine files remain Licensed Material - Property of IBM.
 
 ## ViaVoice Outloud vs. Eloquence — what's the difference?
 
@@ -20,6 +22,7 @@ Both engines are branches of the same family tree, and they sound very similar �
 
 - **Fully registry-free engine operation.** The IBM build reads its configuration only from `HKLM\Software\IBM\ViaVoice Outloud 5.0` (an "ini cache" written by IBM's installer). This wrapper hosts the engine in its own 32-bit process, builds that configuration in a **volatile** per-process registry view from a relocatable `eci.ini`, and redirects the engine onto it with `RegOverridePredefKey`. Nothing persistent is written; the real registry is never consulted by the engine.
 - **32-bit and 64-bit SAPI5 interfaces.** Both DLLs are thin clients of one shared engine host process (`outloud_host.exe`) over a named pipe. An engine crash can never take down your screen reader.
+- **Pick your own languages and voices.** Setup lists all 17 languages and all 8 voice personalities as individual components with their own disk-space figures, alongside Full / English / Compact presets. Only what you tick is written to disk, only its sections are kept in the engine's `eci.ini`, and only its voices appear in the Windows voice list and in the configuration utility. Re-running setup changes the selection.
 - **137 voices**: 8 variants (Reed, Shelley, Sandy, Rocko, Glen, FastFlo, Grandma, Grandpa) x 17 languages (American & British English, Castilian & Latin American Spanish, French & Canadian French, German, Italian, Brazilian Portuguese, Finnish, Mandarin Chinese, Hong Kong Cantonese, Japanese, Korean, Norwegian, Swedish, Danish), plus an "Outloud Configured Voice" shaped entirely by the configuration utility. Variant voices keep their engine-defined personalities; the Configured Voice applies your custom parameters.
 - **Accurate word boundaries and bookmarks** via engine index events, sample-synchronized with the audio stream. Engine annotations are treated as atomic tokens so they can never be split (and spoken) by segment boundaries.
 - **Automatic language switching** from per-fragment SAPI locale information — mixed-language documents just work.
@@ -32,6 +35,14 @@ Both engines are branches of the same family tree, and they sound very similar �
 - `src/` — SAPI5 engine DLL, 32-bit engine host, pipe client, configuration utility
 - `installer/` — Inno Setup script, staging script, relative-path `eci.ini` template
 - `test/` — registry-free engine smoke test, pipe protocol test client, sample-rate probe
+- `bin/` — prebuilt binaries and the ViaVoice Outloud engine runtime (`bin\engine\`)
+
+### How the selection is recorded
+
+`installer\stage.ps1` sorts the engine data into `output\install\` — one folder per language, one for the files they all share, one for the legacy help files — and `outloud.iss` installs the folders whose components were ticked. After copying, setup writes two files:
+
+- `{app}\engine\eci.ini` — `eci.template.ini` with the sections of unselected languages removed, so the engine reports exactly the languages whose data is on disk.
+- `{app}\voices.ini` — the list of selected languages and voice variants. `IEnumSpObjectTokensImpl` builds the SAPI voice list from it, and the configuration utility fills its two combo boxes from it. When the file is absent (a build tree, or an installation made by setup 1.0.0) everything is offered, as before.
 
 ## Building from source
 
@@ -46,7 +57,7 @@ Produces `output\OutloudSAPI_Setup.exe`.
 - Visual Studio 2022 (or Build Tools) with the C++ workload
 - CMake 3.15+
 - Inno Setup 6
-- The ViaVoice Outloud engine files in `bin\` (`ibmeci.dll`, `etidev.dll`, the `*.syn` language data and the four `*rom.dll` romanizers), which you must supply yourself — they are IBM's property and are not part of this repository.
+- The ViaVoice Outloud engine files in `bin\engine\` (`ibmeci.dll`, `etidev.dll`, the `*.syn` language data and the four `*rom.dll` romanizers). These ship with the repository; they are IBM's property, not covered by this project's license.
 
 ## Credits
 

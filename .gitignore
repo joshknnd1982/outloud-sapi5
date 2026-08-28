@@ -1,6 +1,3 @@
-# Engine binaries and language data (IBM property - never committed)
-bin/
-
 # Build trees and staged output
 build/
 build_x86/
@@ -12,3 +9,10 @@ test_output/
 test/*.exe
 test/*.obj
 *.wav
+
+# Left behind by installing into the source tree
+bin/unins000.dat
+bin/unins000.exe
+bin/logs/
+bin/voices.ini
+bin/engine/tts.log

@@ -1,0 +1,25 @@
+:Base ITAsapi.hlp
+:Index The Text-to-Speech Engine=ITAref.hlp
+:Link ITAref.hlp
+1 Impostazioni avanzate della voce
+2 Aggiunta di un termine in un dizionario=Add_a_Term_to_a_Dictionary
+2 Ascolto di una voce=Listen_to_a_Voice
+2 Ascolto della pronuncia di un termine in un dizionario=Listen_to_the_Pronunciation_of_a_Dictionary_Term
+2 Confronto fra due voci=Compare_Two_Voices
+2 Creazione di un nuovo speaker=Create_a_New_Speaker
+2 Creazione di una nuova voce=Create_a_New_Voice
+2 Eliminazione di un termine da un dizionario=Delete_a_Dictionary_Term
+2 Eliminazione di uno speaker=Delete_a_Speaker
+2 Eliminazione di una voce=Delete_a_Voice
+2 Modifica delle opzioni di elaborazione degli indicatori=Change_the_Tag_Processing_Options
+2 Modifica di un termine in un dizionario=Edit_a_Dictionary_Term
+2 Modifica di una voce=Edit_a_Voice
+2 Modifica voci memorizzate=IDH_Edit_Stored_Voices_dialog_box
+2 Selezione della lingua e dell'inflessione dello speaker=Select_a_Language_or_Dialect_for_a_Speaker
+2 Selezione dello speaker=Select_a_Speaker
+2 Selezione dello stile del parlato dello speaker=Select_a_Speaking_Style_for_a_Speaker
+2 Selezione della voce dello speaker=Select_a_Voice_for_a_Speaker
+2 Selezione della frequenza di campionamento audio dello speaker=Select_an_Audio_Sampling_Rate_for_the_Speaker
+2 Visualizzazione delle impostazioni della voce dello speaker=View_the_Voice_Settings_for_a_Speaker
+2 Glossario=Glossary
+:include ITAref.cnt

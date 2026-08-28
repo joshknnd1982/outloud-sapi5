@@ -1,0 +1,23 @@
+:Base ITAref.hlp
+1 ViaVoice Outloud
+2 Introduzione=IDH_eti_eloquence_contents
+2 Indicatori
+3 Indicatori=IDH_tags
+3 Annotazioni=IDH_annotations
+3 Lingua e inflessione=IDH_language_and_dialect
+3 Enfasi=IDH_emphasis
+3 Durata della pausa=IDH_pause_length
+3 Voci incorporate=IDH_who_s_talking
+3 Caratteristiche della voce=IDH_voice_attributes
+2 Trascrizione fonetica
+3 Rappresentazione simbolica fonetica (SPR)=IDH_symbolic_phonetic_representation__spr
+3 Simboli SPR=IDH_spr_symbols
+3 Accento sillabico=IDH_syllable_stress
+2 Dizionari
+3 Dizionari personalizzati=IDH_user_dictionaries
+3 Dizionario delle parole speciali=IDH_special_words_dictionary
+3 Dizionario delle abbreviazioni=IDH_abbreviations_dictionary
+3 Dizionario delle radici=IDH_roots_dictionary
+2 Riferimenti
+3 Tabella degli indicatori=IDH_table_of_tags
+3 Glossario=IDH_glossary

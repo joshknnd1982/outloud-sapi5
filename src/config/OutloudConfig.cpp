@@ -15,6 +15,7 @@
 #include "../voice_data.hpp"
 #include "../engine_client.h"
 #include "../outloud_log.h"
+#include "../installed_voices.h"
 #include "../utils.hpp"
 
 #pragma comment(lib, "comctl32.lib")
@@ -154,19 +155,43 @@ void load_dialog(HWND dlg)
 {
     g_loading = true;
 
+    // Only what setup actually installed is offered. The real language index
+    // and variant number travel in the item data, so the lists stay correct
+    // however few entries they hold.
+    if (!InstalledVoices::has_language(g_settings.languageIndex)) {
+        g_settings.languageIndex = InstalledVoices::first_language();
+    }
+    if (!InstalledVoices::has_variant(g_settings.variant)) {
+        g_settings.variant = InstalledVoices::first_variant();
+    }
+
     HWND combo = GetDlgItem(dlg, IDC_LANGUAGE);
     SendMessageW(combo, CB_RESETCONTENT, 0, 0);
     for (int i = 0; i < voices::language_count; ++i) {
-        SendMessageW(combo, CB_ADDSTRING, 0, reinterpret_cast<LPARAM>(voices::languages[i].name));
+        if (!InstalledVoices::has_language(i)) {
+            continue;
+        }
+        const int item = static_cast<int>(SendMessageW(combo, CB_ADDSTRING, 0,
+            reinterpret_cast<LPARAM>(voices::languages[i].name)));
+        SendMessageW(combo, CB_SETITEMDATA, item, i);
+        if (i == g_settings.languageIndex) {
+            SendMessageW(combo, CB_SETCURSEL, item, 0);
+        }
     }
-    SendMessageW(combo, CB_SETCURSEL, g_settings.languageIndex, 0);
 
     combo = GetDlgItem(dlg, IDC_VARIANT);
     SendMessageW(combo, CB_RESETCONTENT, 0, 0);
     for (int i = 0; i < voices::variant_count; ++i) {
-        SendMessageW(combo, CB_ADDSTRING, 0, reinterpret_cast<LPARAM>(voices::variants[i].name));
+        if (!InstalledVoices::has_variant(voices::variants[i].id)) {
+            continue;
+        }
+        const int item = static_cast<int>(SendMessageW(combo, CB_ADDSTRING, 0,
+            reinterpret_cast<LPARAM>(voices::variants[i].name)));
+        SendMessageW(combo, CB_SETITEMDATA, item, voices::variants[i].id);
+        if (voices::variants[i].id == g_settings.variant) {
+            SendMessageW(combo, CB_SETCURSEL, item, 0);
+        }
     }
-    SendMessageW(combo, CB_SETCURSEL, g_settings.variant - 1, 0);
 
     combo = GetDlgItem(dlg, IDC_PAUSES);
     SendMessageW(combo, CB_RESETCONTENT, 0, 0);
@@ -216,13 +241,22 @@ void on_command(HWND dlg, int id, int code)
     switch (id) {
     case IDC_LANGUAGE:
         if (code == CBN_SELCHANGE) {
-            g_settings.languageIndex = static_cast<int>(SendDlgItemMessageW(dlg, IDC_LANGUAGE, CB_GETCURSEL, 0, 0));
+            const int item = static_cast<int>(SendDlgItemMessageW(dlg, IDC_LANGUAGE, CB_GETCURSEL, 0, 0));
+            if (item >= 0) {
+                g_settings.languageIndex = static_cast<int>(
+                    SendDlgItemMessageW(dlg, IDC_LANGUAGE, CB_GETITEMDATA, item, 0));
+            }
             save_settings();
         }
         break;
     case IDC_VARIANT:
         if (code == CBN_SELCHANGE) {
-            g_settings.variant = static_cast<int>(SendDlgItemMessageW(dlg, IDC_VARIANT, CB_GETCURSEL, 0, 0)) + 1;
+            const int item = static_cast<int>(SendDlgItemMessageW(dlg, IDC_VARIANT, CB_GETCURSEL, 0, 0));
+            if (item < 0) {
+                break;
+            }
+            g_settings.variant = static_cast<int>(
+                SendDlgItemMessageW(dlg, IDC_VARIANT, CB_GETITEMDATA, item, 0));
             // Like the NVDA driver: switching the variant loads that voice's
             // engine-defined character parameters; only the rate is kept.
             const auto& vd = voices::variants[g_settings.variant - 1];

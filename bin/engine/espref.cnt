@@ -1,0 +1,23 @@
+:Base ESPref.hlp
+1 ViaVoice Outloud
+2 Introducción=IDH_eti_eloquence_contents
+2 Marcadores
+3 Marcadores=IDH_tags
+3 Anotaciones=IDH_annotations
+3 Idioma y dialecto=IDH_language_and_dialect
+3 Enfasis=IDH_emphasis
+3 Duración de la pausa=IDH_pause_length
+3 Voces incorporadas=IDH_who_s_talking
+3 Características de la voz=IDH_voice_attributes
+2 Ortografía fonética
+3 Representación Fonética de Símbolos (RFS)=IDH_symbolic_phonetic_representation__spr
+3 Símbolos RFS=IDH_spr_symbols
+3 Acento silábico=IDH_syllable_stress
+2 Diccionarios
+3 Diccionarios del usuario=IDH_user_dictionaries
+3 Diccionario de Palabras Especiales=IDH_special_words_dictionary
+3 Diccionario de Abreviaturas=IDH_abbreviations_dictionary
+3 Diccionario de Raíces=IDH_roots_dictionary
+2 Referencia
+3 Tabla de marcadores=IDH_table_of_tags
+3 Glosario=IDH_glossary

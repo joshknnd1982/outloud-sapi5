@@ -1,0 +1,26 @@
+:Base DEUref.hlp>main
+1 ViaVoice Outloud
+2 Einführung=IDH_eti_eloquence_contents
+2 Anweisungen
+3 Anweisungen=IDH_tags
+3 Steuerbefehle=IDH_annotations
+3 Landessprache und Dialekt=IDH_language_and_dialect
+3 Emphase=IDH_emphasis
+3 Pausenlänge=IDH_pause_length
+3 Integrierte Stimmen=IDH_who_s_talking
+3 Stimmeigenschaften=IDH_voice_attributes
+3 Anweisungstabelle=IDH_table_of_tags
+2 Stimmen für das Telefon
+3 Stimmen für das Telefon=IDH_voices_for_phone
+2 Phonetische Schreibweisen
+3 Phonetische Transkription (Symbolic Phonetic Representation (SPR))=IDH_symbolic_phonetic_representation__spr
+3 Transkriptionssymbole=IDH_spr_symbols
+3 Silbenbetonung=IDH_syllable_stress
+2 Wörterbücher
+3 Benutzerwörterbücher=IDH_user_dictionaries
+3 Spezialwörterbuch=IDH_special_words_dictionary
+3 Abkürzungswörterbuch =IDH_abbreviations_dictionary
+3 Stammwörterbuch=IDH_roots_dictionary
+2 Referenzen
+3 Anweisungstabelle=IDH_table_of_tags
+3 Glossar=IDH_glossary

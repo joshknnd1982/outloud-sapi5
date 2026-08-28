@@ -11,6 +11,7 @@
 #include "settings.h"
 #include "text_preprocess.h"
 #include "outloud_log.h"
+#include "installed_voices.h"
 
 namespace Outloud {
 namespace sapi {
@@ -298,6 +299,11 @@ STDMETHODIMP ISpTTSEngineImpl::Speak(
 
         int langIndex = attr.is_configured() ? s.languageIndex : attr.language_index();
         langIndex = clampi(langIndex, 0, voices::language_count - 1);
+        // The Configured Voice follows settings.ini, which may still name a
+        // language that this installation does not include.
+        if (!InstalledVoices::has_language(langIndex)) {
+            langIndex = InstalledVoices::first_language();
+        }
         const int variant = attr.is_configured()
             ? clampi(s.variant, 1, voices::variant_count)
             : voices::variants[attr.variant_index()].id;
@@ -435,7 +441,8 @@ STDMETHODIMP ISpTTSEngineImpl::Speak(
             // documents with mixed languages).
             if (st.LangID != 0) {
                 const int li = voices::language_index_from_langid(st.LangID);
-                if (li >= 0 && li != curLangIndex) {
+                // Never switch into a language whose data was not installed.
+                if (li >= 0 && li != curLangIndex && InstalledVoices::has_language(li)) {
                     add_annotation(std::string(voices::languages[li].annotation) + " ");
                     curLangIndex = li;
                 }

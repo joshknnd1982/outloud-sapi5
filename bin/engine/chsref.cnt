@@ -1,0 +1,30 @@
+:Base ..\build\chsref.hlp
+1 ViaVoice Outloud Reference
+2 Introduction=IDH_eti_eloquence_contents
+2 Tags
+3 Tags=IDH_tags
+3 Annotations=IDH_annotations
+3 Language and Dialect=IDH_language_and_dialect
+3 Built-in Voices=IDH_who_s_talking
+3 Voice Characteristics=IDH_voice_attributes
+3 Pause Length=IDH_pause_length
+2 Voices for the Telephone=IDH_voices_for_phone
+2 Phonetic Spellings
+3 Symbolic Phonetic Representation (SPR)=IDH_symbolic_phonetic_representation_spr
+3 Chinese and English SPR Input=IDH_chi_eng_sprs
+3 SPR Symbols for Chinese Words=IDH_chinese_spr_symbols
+3 Syllable Tone in SPRs=IDH_chi_spr_tone
+3 Syllable Stress in SPRs=IDH_chi_spr_stress
+3 SPR Symbols for English Words=IDH_english_spr_symbols
+2 Dictionaries
+3 User Dictionaries=IDH_user_dictionaries
+3 Special Words Dictionary=IDH_special_words_dictionary
+3 Abbreviations Dictionary=IDH_abbreviations_dictionary
+3 Roots Dictionary=IDH_roots_dictionary
+2 Input Types
+3 Input Types=IDH_input_types
+3 Pinyin Input=IDH_pinyin
+2 Reference
+3 Table of Tags=IDH_table_of_tags
+3 Table of SPR symbols=IDH_chinese_spr_symbols
+3 Glossary=IDH_glossary

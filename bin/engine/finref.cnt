@@ -1,0 +1,27 @@
+:Base FINref.hlp
+1 ETI-Eloquence Reference
+2 Esittely=IDH_eti_eloquence_contents
+2 M‰‰ritteet
+3 M‰‰ritteiden esittely=IDH_tags
+3 Huomautukset=IDH_annotations
+3 Kieli ja rajaus=IDH_language_and_dialect
+3 Painotus=IDH_emphasis
+3 Tauon pituus=IDH_pause_length
+3 Valmiiksi m‰‰ritetyt ‰‰net=IDH_who_s_talking
+3 ƒ‰nen ominaisuudet=IDH_voice_attributes
+3 M‰‰ritteiden taulukko=IDH_table_of_tags
+2 ƒ‰net puhelinta varten
+3 ƒ‰net puhelinta varten=IDH_voices_for_phone
+2 Foneettinen ‰‰nt‰minen
+3 Symbolic Phonetic Representation (symbolinen foneettinen esitys), SPR=IDH_symbolic_phonetic_representation__spr
+3 SPR-symbolit=IDH_spr_symbols
+3 Tavupaino=IDH_syllable_stress
+2 Sanastot
+3 K‰ytt‰j‰n sanastot=IDH_user_dictionaries
+3 Erikoissanojen sanasto=IDH_special_words_dictionary
+3 Lyhenteiden sanasto=IDH_abbreviations_dictionary
+3 Sanavartaloiden sanasto=IDH_roots_dictionary
+2 Lis‰tiedot
+3 M‰‰ritteiden taulukko=IDH_table_of_tags
+3 SPR-symbolien taulukko=IDH_spr_symbols
+3 Ohjelmassa k‰ytetyt termit=IDH_glossary

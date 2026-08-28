@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.15)
-project(OutloudSAPI VERSION 1.0.0 LANGUAGES C CXX)
+project(OutloudSAPI VERSION 1.1.0 LANGUAGES C CXX)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -28,6 +28,7 @@ add_library(OutloudSAPI SHARED
     src/ISpTTSEngineImpl.cpp
     src/voice_token.cpp
     src/settings.cpp
+    src/installed_voices.cpp
     src/engine_client.cpp
     src/text_preprocess.cpp
     src/outloud_sapi.def
@@ -61,6 +62,7 @@ if(NOT BUILD_X64)
         src/config/OutloudConfig.cpp
         src/config/OutloudConfig.rc
         src/settings.cpp
+        src/installed_voices.cpp
         src/engine_client.cpp
     )
     target_include_directories(OutloudConfig PRIVATE

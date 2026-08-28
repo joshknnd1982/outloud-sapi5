@@ -1,0 +1,27 @@
+:Base ENGref.hlp
+1 ViaVoice Outloud Reference
+2 Introduction=IDH_eti_eloquence_contents
+2 Tags
+3 Introduction to Tags=IDH_tags
+3 Annotations=IDH_annotations
+3 Language and Dialect=IDH_language_and_dialect
+3 Emphasis=IDH_emphasis
+3 Pause Length=IDH_pause_length
+3 Built-in Voices=IDH_who_s_talking
+3 Voice Characteristics=IDH_voice_attributes
+3 Table of Tags=IDH_table_of_tags
+2 Voices for the Telephone
+3 Voices for the Telephone=IDH_voices_for_phone
+2 Phonetic Spellings
+3 Symbolic Phonetic Representation (SPR)=IDH_symbolic_phonetic_representation__spr
+3 SPR Symbols=IDH_spr_symbols
+3 Syllable Stress=IDH_syllable_stress
+2 Dictionaries
+3 User Dictionaries=IDH_user_dictionaries
+3 Special Words Dictionary=IDH_special_words_dictionary
+3 Abbreviations Dictionary=IDH_abbreviations_dictionary
+3 Roots Dictionary=IDH_roots_dictionary
+2 Reference
+3 Table of Tags=IDH_table_of_tags
+3 Table of SPR symbols=IDH_spr_symbols
+3 Glossary=IDH_glossary
