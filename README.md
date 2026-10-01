@@ -62,9 +62,9 @@ Produces `output\OutloudSAPI_Setup.exe`.
 ## Credits
 
 - The IBM ViaVoice Outloud engine is Licensed Material — Property of IBM.
-- Text preprocessing, crash-word fixes and driver behavior are ported from the [NVDA IBMTTS driver add-on](https://github.com/davidacm/NVDA-IBMTTS-Driver) by David CM and contributors (GPL).
-- SAPI5 COM plumbing adapted from the Bestspeech SAPI wrapper by Gozaltech.
+- Text preprocessing, crash-word fixes and driver behavior are ported from the [NVDA IBMTTS driver add-on](https://github.com/davidacm/NVDA-IBMTTS-Driver) by David CM and contributors; the port is released under the MIT License (see [NOTICE.md](NOTICE.md)).
+- SAPI5 COM plumbing adapted from the Bestspeech SAPI wrapper by Gozaltech; the adapted files are listed in [NOTICE.md](NOTICE.md) and are not covered by the MIT License.
 
 ## License
 
-GNU General Public License v2.0 or later — see [LICENSE](LICENSE). The license covers the wrapper source code only, not the IBM engine or its data files.
+MIT License — see [LICENSE](LICENSE). The license covers the wrapper source code only, not the IBM engine or its data files, and not the files adapted from Gozaltech's Bestspeech SAPI wrapper. [NOTICE.md](NOTICE.md) lists what it does not cover.
